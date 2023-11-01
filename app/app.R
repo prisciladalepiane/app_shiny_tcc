@@ -1,11 +1,3 @@
-library(shiny)
+questoes <- 1:20
 
-ui <- fluidPage(
-  
-)
-
-server <- function(input, output, session) {
-  
-}
-
-shinyApp(ui, server)
+runApp('app')
