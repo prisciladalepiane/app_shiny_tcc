@@ -14,14 +14,29 @@ library(tidyverse)
 questoes <- 1:20
 areas <- c("Linguagem", "Matemática")
 
-data(LSAT)
-lsat.desc<-descript(LSAT)
+teste <- read.csv2("C:\\trieduc\\bd\\TCT\\tct_sesi.csv") |> select(-InstrumentoId)
 
 
 ###########################  Interface Usuario ################################# 
 
 
-ui <- navbarPage("Unicesumar",
+ui <- navbarPage(
+  
+              title = "Unicesumar",
+                 
+              tags$head(
+                tags$style(HTML("
+                body {
+                  background-color: #EEEEEE;
+                  color: black;
+                }
+                .shiny-input-container {
+                    text-align: center;
+                    font-size: 18px
+                }
+                /* Make text visible on inputs */
+                                "))
+              ),
              header = use_theme(
                create_theme(
                  theme = "default",
@@ -33,6 +48,7 @@ ui <- navbarPage("Unicesumar",
                    default_link_active_color = "#FFFFFF",
                    default_link_hover_color = "#A4A4A4"
                  ),
+
                  bs_vars_global(
                    grid_columns = 2,
                    grid_gutter_width = "15px"
@@ -59,8 +75,13 @@ ui <- navbarPage("Unicesumar",
                     )       
            ),
            tabPanel("Índices TCT",
-                    fluidRow(checkboxGroupInput("selArea", "Selecione a área:", areas, inline = T)),
-                    fluidRow(column(12, tableOutput("tbDescript"))
+                      
+                     
+                     fluidRow(
+                       checkboxGroupInput("selArea", "Selecione a área:", areas, inline = T)
+                       ),
+                   
+                     fluidRow(column(10, tableOutput("tbDescript"))
                     )         
                     
                     
@@ -83,7 +104,7 @@ server <- function(input, output, session) {
   })
   
   output$tbMatriz <- renderTable(LSAT)
-  output$tbDescript <- renderTable(iris)
+  output$tbDescript <- renderTable(teste)
   
   
   output$tbRespostas <- renderDataTable({
