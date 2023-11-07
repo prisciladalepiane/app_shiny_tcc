@@ -81,11 +81,15 @@ ui <- navbarPage(
            tabPanel("Índices TCT",
                       
                      
-                     fluidRow(
-                       checkboxGroupInput("selArea", "Selecione a área:", areas, inline = T)
+                    sidebarPanel(
+                       # selectInput("selArea", "Selecione a área:", areas)
+                       
                        ),
                    
-                     fluidRow(column(10, tableOutput("tbDescript"))
+                    mainPanel(
+                      h3("Teoria Cássica dos Testes"),
+                      
+                      tableOutput("tbDescript")
                     )         
                     
                     
@@ -101,12 +105,7 @@ ui <- navbarPage(
 
 server <- function(input, output, session) {
   
-  output$distPlot <- renderPlot({
-    
-    plot(iris)
-    
-  })
-  
+
   descript <- calcularTCT(matriz)
   
   output$tbMatriz <- renderTable(LSAT)
@@ -123,6 +122,8 @@ server <- function(input, output, session) {
         
         return(read.csv2(arq$datapath))
    })
+  
+
   
 }
 
