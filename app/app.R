@@ -5,6 +5,7 @@ library(ltm)
 library(fresh)
 library(shinyWidgets)
 library(htmltools)
+library(tidyverse)
 
 
 ###########################  Definir Variáveis ################################# 
@@ -13,56 +14,79 @@ library(htmltools)
 questoes <- 1:20
 areas <- c("Linguagem", "Matemática")
 
-data(LSAT)
-lsat.desc<-descript(LSAT)
+teste <- read.csv2("C:\\trieduc\\bd\\TCT\\tct_sesi.csv") |> select(-InstrumentoId)
 
 
 ###########################  Interface Usuario ################################# 
 
 
-ui <- navbarPage("Unicesumar",
+ui <- navbarPage(
+  
+              title = "Unicesumar",
+                 
+              tags$head(
+                tags$style(HTML("
+                body {
+                  background-color: #EEEEEE;
+                  color: black;
+                }
+                .shiny-input-container {
+                    text-align: center;
+                    font-size: 18px
+                }
+                /* Make text visible on inputs */
+                                "))
+              ),
              header = use_theme(
                create_theme(
                  theme = "default",
                  bs_vars_navbar(
-                   padding_horizontal = "15px",
-                   default_bg = "#1122BB",
+                   padding_horizontal = "180px",
+                   default_bg = "#112446",
                    default_color = "#FFFFFF",
                    default_link_color = "#FFFFFF",
-                   default_link_active_color = "#91FFFF",
+                   default_link_active_color = "#FFFFFF",
                    default_link_hover_color = "#A4A4A4"
+                 ),
+
+                 bs_vars_global(
+                   grid_columns = 2,
+                   grid_gutter_width = "15px"
                  ),
                  output_file = NULL
                )
              ),
-
            tabPanel("Início",
                     sidebarLayout(
                       
                       sidebarPanel(
                         
                         wellPanel(
-                          selectInput("selArea", "Selecione a área:", areas)
+                               fileInput("file1", "Buscar arquivo csv", accept = ".csv")
                         )
                         
                       ),
                       
                       mainPanel(
-                        tabsetPanel(
-                          plotOutput("distPlot")
-
-                      )
+                          dataTableOutput("tbRespostas")
                       
                     )
                     
                     )       
            ),
            tabPanel("Índices TCT",
-                    tableOutput("tbDescript")
+                      
+                     
+                     fluidRow(
+                       checkboxGroupInput("selArea", "Selecione a área:", areas, inline = T)
+                       ),
+                   
+                     fluidRow(column(10, tableOutput("tbDescript"))
+                    )         
+                    
                     
            ),
-           tabPanel("Análise por questão",
-                    plotOutput("distPlot")
+           tabPanel("Análise por questão"
                     
            )
            
@@ -80,7 +104,19 @@ server <- function(input, output, session) {
   })
   
   output$tbMatriz <- renderTable(LSAT)
-  output$tbDescript <- renderTable(lsat.desc$bisCorr)
+  output$tbDescript <- renderTable(teste)
+  
+  
+  output$tbRespostas <- renderDataTable({
+    
+        arq <- input$file1
+        
+        if(is.null(arq)){
+          return(NULL)
+        }
+        
+        return(read.csv2(arq$datapath))
+   })
   
 }
 
