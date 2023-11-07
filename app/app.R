@@ -7,6 +7,7 @@ library(shinyWidgets)
 library(htmltools)
 library(tidyverse)
 
+source("../model/funcoes.R")
 
 ###########################  Definir Variáveis ################################# 
 
@@ -16,6 +17,9 @@ areas <- c("Linguagem", "Matemática")
 
 teste <- read.csv2("C:\\trieduc\\bd\\TCT\\tct_sesi.csv") |> select(-InstrumentoId)
 
+data(LSAT)
+
+matriz <- LSAT
 
 ###########################  Interface Usuario ################################# 
 
@@ -103,8 +107,10 @@ server <- function(input, output, session) {
     
   })
   
+  descript <- calcularTCT(matriz)
+  
   output$tbMatriz <- renderTable(LSAT)
-  output$tbDescript <- renderTable(teste)
+  output$tbDescript <- renderTable(descript)
   
   
   output$tbRespostas <- renderDataTable({
