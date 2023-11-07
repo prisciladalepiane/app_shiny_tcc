@@ -18,15 +18,6 @@ server <- function(input, output, session) {
              BIS > 0.3 & BIS < 1 ~ "Excelente"
            ))
   
-  
-  descript <- 
-    descript |>  
-    mutate(Dificuldade = case_when(DIFI <= 0.25 ~ "Difícil", 
-                                   DIFI > 0.25 & DIFI <= 0.75 ~ "Média", 
-                                   DIFI  > 0.75 ~ "Fácil"))
-          
-  
-  
   ### Renderizar outputs
   
   output$tbMatriz <- renderTable(LSAT)
