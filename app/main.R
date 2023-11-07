@@ -17,8 +17,6 @@ source("server.R")
 questoes <- 1:20
 areas <- c("Linguagem", "Matemática")
 
-teste <- read.csv2("C:\\trieduc\\bd\\TCT\\tct_sesi.csv") |> select(-InstrumentoId)
-
 data(LSAT)
 
 matriz <- LSAT
