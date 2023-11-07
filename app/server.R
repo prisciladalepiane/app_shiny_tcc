@@ -4,6 +4,14 @@ server <- function(input, output, session) {
   
   descript <- calcularTCT(matriz)
   
+  descript <- 
+    descript |>  
+    mutate(Dificuldade = case_when(DIFI <= 0.25 ~ "Difícil", 
+                                   DIFI > 0.25 & DIFI <= 0.75 ~ "Média", 
+                                   DIFI  > 0.75 ~ "Fácil"))
+          
+  
+  
   ### Renderizar outputs
   
   output$tbMatriz <- renderTable(LSAT)
