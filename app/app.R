@@ -7,6 +7,7 @@ library(shinyWidgets)
 library(htmltools)
 library(tidyverse)
 
+source("../model/funcoes.R")
 
 ###########################  Definir Variáveis ################################# 
 
@@ -16,6 +17,9 @@ areas <- c("Linguagem", "Matemática")
 
 teste <- read.csv2("C:\\trieduc\\bd\\TCT\\tct_sesi.csv") |> select(-InstrumentoId)
 
+data(LSAT)
+
+matriz <- LSAT
 
 ###########################  Interface Usuario ################################# 
 
@@ -77,11 +81,15 @@ ui <- navbarPage(
            tabPanel("Índices TCT",
                       
                      
-                     fluidRow(
-                       checkboxGroupInput("selArea", "Selecione a área:", areas, inline = T)
+                    sidebarPanel(
+                       # selectInput("selArea", "Selecione a área:", areas)
+                       
                        ),
                    
-                     fluidRow(column(10, tableOutput("tbDescript"))
+                    mainPanel(
+                      h3("Teoria Cássica dos Testes"),
+                      
+                      tableOutput("tbDescript")
                     )         
                     
                     
@@ -97,14 +105,11 @@ ui <- navbarPage(
 
 server <- function(input, output, session) {
   
-  output$distPlot <- renderPlot({
-    
-    plot(iris)
-    
-  })
+
+  descript <- calcularTCT(matriz)
   
   output$tbMatriz <- renderTable(LSAT)
-  output$tbDescript <- renderTable(teste)
+  output$tbDescript <- renderTable(descript)
   
   
   output$tbRespostas <- renderDataTable({
@@ -117,6 +122,8 @@ server <- function(input, output, session) {
         
         return(read.csv2(arq$datapath))
    })
+  
+
   
 }
 
