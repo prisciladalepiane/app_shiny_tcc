@@ -44,3 +44,31 @@ calcularTCT <- function(matriz){
   return(tct_questoes)
   
 }
+
+
+respostasParaMatriz <- function(respostas, alternativas = FALSE, fill = 0){
+  
+  respostas <- respostas %>% arrange(desc(Acerto)) %>% 
+    distinct(RespondenteId, CodigoQuestao, .keep_all = T) 
+  
+  if(alternativas){
+    
+    matriz <- respostas %>%
+      filter(!Anulado) %>%
+      dplyr::select(RespondenteId, CodigoQuestao, Ordem) %>% 
+      spread(key = CodigoQuestao, value =  Ordem, fill = NA) 
+    
+  } else {
+    
+    matriz <- respostas %>% 
+      mutate(Acerto = as.integer(Acerto)) %>% 
+      dplyr::select(RespondenteId, CodigoQuestao, Acerto) %>% 
+      spread(CodigoQuestao, Acerto, fill = fill ) 
+    
+  }
+  
+  return(matriz)
+}
+
+
+
