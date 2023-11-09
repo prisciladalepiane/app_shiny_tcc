@@ -52,21 +52,13 @@ ui <- navbarPage(
   tabPanel("Índices TCT",
            
            
-           sidebarPanel(
-             # selectInput("selArea", "Selecione a área:", areas)
-             
-           ),
-           
-           mainPanel(
-             h3("Teoria Cássica dos Testes"),
-             
-             tableOutput("tbDescript")
-           )         
+           column(width = 12,offset = 2, tableOutput("tbDescript"))        
            
            
   ),
   tabPanel("Análise Alternativas",
-           tableOutput("tbAlternativas")
+           column(width = 12,offset = 2, tableOutput("tbAlternativas"))
+           
   ),
   tabPanel("Análise por questão"
            
