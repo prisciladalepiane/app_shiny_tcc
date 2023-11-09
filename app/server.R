@@ -23,6 +23,8 @@ server <- function(input, output, session) {
   output$tbMatriz <- renderTable(LSAT)
   output$tbDescript <- renderTable(descript)
   
+  output$tbAlternativas <- renderTable(tct_alternativas)
+  
   output$tbRespostas <- renderDataTable({
     
     arq <- input$file1

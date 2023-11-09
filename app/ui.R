@@ -65,6 +65,9 @@ ui <- navbarPage(
            
            
   ),
+  tabPanel("Análise Alternativas",
+           tableOutput("tbAlternativas")
+  ),
   tabPanel("Análise por questão"
            
   )
