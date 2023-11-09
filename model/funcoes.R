@@ -70,26 +70,25 @@ respostasParaMatriz <- function(respostas, alternativas = FALSE, fill = 0){
   return(matriz)
 }
 
-calculoBisserialAlternativas <- function(m, gab){
+calculoTctAlternativas <- function(m, gab){
   
-  analise <- CTT::distractorAnalysis(m %>% 
-                                       select(gab$Item) %>%
+  analise <- CTT::distractorAnalysis(m |> 
+                                       select(gab$Item) %>% 
                                        replace(is.na(.), 0),gab$Gabarito)
   
   fim <- data.frame()
   
   for( i in 1:length(analise)){
     
-    fim1 <- analise[[i]] %>% as.data.frame() %>%
+    fim1 <- analise[[i]] |> as.data.frame() |>
       mutate(Item = names(analise[i])) 
     
     
-    fim <- fim %>% bind_rows(fim1) 
+    fim <- fim |> bind_rows(fim1) 
     
   }
   
   row.names(fim) <- NULL
   
-  return(fim %>% select(Item, everything()))
+  return(fim |> select(Item, everything()))
 }
-
