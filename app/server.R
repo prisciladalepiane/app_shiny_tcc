@@ -2,7 +2,7 @@ server <- function(input, output, session) {
   
   ###  Cálculos 
   
-  tct <- calcularTCT(matriz)
+  tct <- calcularTCT(matriz[,-1])
   
   descript <- tct |>  
     mutate(Dificuldade = case_when(DIFI <= 0.1 ~ "Muito Difícil", 
@@ -20,7 +20,6 @@ server <- function(input, output, session) {
   
   ### Renderizar outputs
   
-  output$tbMatriz <- renderTable(LSAT)
   output$tbDescript <- renderTable(descript)
   
   output$tbAlternativas <- renderTable(tct_alternativas)
@@ -36,4 +35,17 @@ server <- function(input, output, session) {
     return(read.csv2(arq$datapath))
   })
   
+  filtrarQuestao <- eventReactive(input$slQuestao,{
+    grafico_alt |> filter(CodigoQuestao == input$slQuestao) 
+   
+  })
+  
+  output$gfAlternativas <- renderPlot(
+    ggplot(filtrarQuestao()) +
+      aes(x = Acertos, y = n, colour = Ordem) +
+      geom_line(size = 1) +
+      scale_color_hue(direction = 1) +
+      theme_minimal() +
+      labs(title = input$slQuestao)
+  )
 }

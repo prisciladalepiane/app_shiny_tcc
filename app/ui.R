@@ -60,8 +60,27 @@ ui <- navbarPage(
            column(width = 12,offset = 2, tableOutput("tbAlternativas"))
            
   ),
-  tabPanel("Análise por questão"
-           
+  tabPanel("Análise por questão",
+           sidebarLayout(
+             
+             sidebarPanel(
+               
+               selectInput("slQuestao", "Questão:", 
+                           choices = questoes, selected = 1)
+               
+             ),
+             
+             mainPanel(
+               column(10,
+                   h3("Proporção de Alternativa por número de acertos"),    
+                   plotOutput("gfAlternativas")
+                        )
+               
+             )
+               
+             )
   )
-  
-)
+           )      
+           
+
+           
