@@ -2,7 +2,7 @@ server <- function(input, output, session) {
   
   ###  Cálculos 
   
-  tct <- calcularTCT(matriz)
+  tct <- calcularTCT(matriz[,-1])
   
   descript <- tct |>  
     mutate(Dificuldade = case_when(DIFI <= 0.1 ~ "Muito Difícil", 
@@ -20,7 +20,7 @@ server <- function(input, output, session) {
   
   ### Renderizar outputs
   
-  output$tbMatriz <- renderTable(LSAT)
+  # output$tbMatriz <- renderTable(LSAT)
   output$tbDescript <- renderTable(descript)
   
   output$tbAlternativas <- renderTable(tct_alternativas)

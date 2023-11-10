@@ -23,7 +23,7 @@ gabarito <- read.csv2("C:/tcc2_eng/gabarito_teste.csv")
 
 questoes <- gabarito$Item
 
-matriz <- respostasParaMatriz(teste) %>% select(-RespondenteId)
+matriz <- respostasParaMatriz(teste) 
 
 matriz_alternativas <- respostasParaMatriz(teste, alternativas = T)
 
@@ -36,6 +36,15 @@ tct_alternativas <- tct_alt  |>
   gather(key = "Alternativa", value = "Valores", -c(Item, key)) |> 
   spread(key = key, value = Valores) |>
   arrange(Item, factor(Alternativa, levels = c("correct", "n", "rspP", "pBis")))
+
+acertos <- matriz %>% select(RespondenteId) %>% mutate(Acertos = rowSums(matriz[,-1]))
+
+grafico_alt <- teste %>% left_join(acertos) %>%
+  group_by(Acertos,CodigoQuestao,Ordem) %>% 
+  count() %>%
+  mutate(Ordem = as.character(Ordem)) %>% 
+  filter(CodigoQuestao == "Q01_TRIEDUC_ENEM6_3EM_CH_C4H16_2023") 
+
 
 ###########################  Rodar Aplicacao ################################### 
 
