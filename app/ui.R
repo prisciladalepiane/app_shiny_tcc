@@ -61,9 +61,23 @@ ui <- navbarPage(
            
   ),
   tabPanel("Análise por questão",
-           
-           plotOutput("gfAlternativas")
-           
+           sidebarLayout(
+             
+             sidebarPanel(
+               
+               selectInput("select", h3("Questão:"), 
+                           choices = questoes, selected = 1)
+               
+             ),
+             
+             mainPanel(
+               plotOutput("gfAlternativas")
+               
+             )
+               
+             )
   )
-  
-)
+           )      
+           
+
+           
