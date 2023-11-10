@@ -60,7 +60,9 @@ ui <- navbarPage(
            column(width = 12,offset = 2, tableOutput("tbAlternativas"))
            
   ),
-  tabPanel("Análise por questão"
+  tabPanel("Análise por questão",
+           
+           plotOutput("gfAlternativas")
            
   )
   

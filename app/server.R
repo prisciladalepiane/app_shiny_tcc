@@ -20,7 +20,6 @@ server <- function(input, output, session) {
   
   ### Renderizar outputs
   
-  # output$tbMatriz <- renderTable(LSAT)
   output$tbDescript <- renderTable(descript)
   
   output$tbAlternativas <- renderTable(tct_alternativas)
@@ -36,4 +35,11 @@ server <- function(input, output, session) {
     return(read.csv2(arq$datapath))
   })
   
+  output$gfAlternativas <- renderPlot(
+    ggplot(grafico_alt) +
+      aes(x = Acertos, y = n, colour = Ordem) +
+      geom_line(size = 1) +
+      scale_color_hue(direction = 1) +
+      theme_minimal()
+  )
 }
