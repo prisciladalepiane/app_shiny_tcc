@@ -14,10 +14,6 @@ source("server.R")
 ###########################  Definir Variáveis ################################# 
 
 
-questoes <- 1:20
-areas <- c("Linguagem", "Matemática")
-
-
 teste <- read.csv2("C:/tcc2_eng/respostas_teste.csv")
 gabarito <- read.csv2("C:/tcc2_eng/gabarito_teste.csv")
 
@@ -39,11 +35,10 @@ tct_alternativas <- tct_alt  |>
 
 acertos <- matriz %>% select(RespondenteId) %>% mutate(Acertos = rowSums(matriz[,-1]))
 
-grafico_alt <- teste %>% left_join(acertos) %>%
-  group_by(Acertos,CodigoQuestao,Ordem) %>% 
-  count() %>%
-  mutate(Ordem = as.character(Ordem)) %>% 
-  filter(CodigoQuestao == "Q01_TRIEDUC_ENEM6_3EM_CH_C4H16_2023") 
+grafico_alt <- teste |> left_join(acertos) |>
+  group_by(Acertos,CodigoQuestao,Ordem) |> 
+  count() |>
+  mutate(Ordem = as.character(Ordem)) 
 
 
 ###########################  Rodar Aplicacao ################################### 

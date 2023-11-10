@@ -65,13 +65,16 @@ ui <- navbarPage(
              
              sidebarPanel(
                
-               selectInput("select", h3("Questão:"), 
+               selectInput("slQuestao", "Questão:", 
                            choices = questoes, selected = 1)
                
              ),
              
              mainPanel(
-               plotOutput("gfAlternativas")
+               column(10,
+                   h3("Proporção de Alternativa por número de acertos"),    
+                   plotOutput("gfAlternativas")
+                        )
                
              )
                
