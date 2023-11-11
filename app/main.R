@@ -13,7 +13,6 @@ source("server.R")
 
 ###########################  Definir Variáveis ################################# 
 
-
 teste <- read.csv2("C:/tcc2_eng/respostas_teste.csv")
 gabarito <- read.csv2("C:/tcc2_eng/gabarito_teste.csv")
 
@@ -38,9 +37,9 @@ tct_alternativas <- tct_alt  |>
 acertos <- matriz %>% select(RespondenteId) %>% mutate(Acertos = rowSums(matriz[,-1]))
 
 grafico_alt <- respostas |> left_join(acertos) |>
-  group_by(Acertos,CodigoQuestao,Ordem) |> 
+  group_by(Acertos,CodigoQuestao,AlternativaOrdem) |> 
   count() |>
-  mutate(Ordem = as.character(Ordem)) 
+  mutate(AlternativaOrdem = as.character(AlternativaOrdem)) 
 
 
 ###########################  Rodar Aplicacao ################################### 
