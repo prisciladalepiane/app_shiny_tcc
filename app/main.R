@@ -13,15 +13,17 @@ source("server.R")
 
 ###########################  Definir Variáveis ################################# 
 
-
 teste <- read.csv2("C:/tcc2_eng/respostas_teste.csv")
 gabarito <- read.csv2("C:/tcc2_eng/gabarito_teste.csv")
 
+respostas <- teste |> mutate(CodigoQuestao = str_sub(CodigoQuestao,1,3))
+gabarito <- gabarito |> mutate(Item = str_sub(Item,1,3))
+
 questoes <- gabarito$Item
 
-matriz <- respostasParaMatriz(teste) 
+matriz <- respostasParaMatriz(respostas) 
 
-matriz_alternativas <- respostasParaMatriz(teste, alternativas = T)
+matriz_alternativas <- respostasParaMatriz(respostas, alternativas = T)
 
 tct_alt <- calculoTctAlternativas(matriz_alternativas, gabarito)
 
@@ -35,10 +37,10 @@ tct_alternativas <- tct_alt  |>
 
 acertos <- matriz %>% select(RespondenteId) %>% mutate(Acertos = rowSums(matriz[,-1]))
 
-grafico_alt <- teste |> left_join(acertos) |>
-  group_by(Acertos,CodigoQuestao,Ordem) |> 
+grafico_alt <- respostas |> left_join(acertos) |>
+  group_by(Acertos,CodigoQuestao,AlternativaOrdem) |> 
   count() |>
-  mutate(Ordem = as.character(Ordem)) 
+  mutate(AlternativaOrdem = as.character(AlternativaOrdem)) 
 
 
 ###########################  Rodar Aplicacao ################################### 

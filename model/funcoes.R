@@ -55,8 +55,8 @@ respostasParaMatriz <- function(respostas, alternativas = FALSE, fill = 0){
     
     matriz <- respostas %>%
       filter(!Anulado) %>%
-      dplyr::select(RespondenteId, CodigoQuestao, Ordem) %>% 
-      spread(key = CodigoQuestao, value =  Ordem, fill = NA) 
+      dplyr::select(RespondenteId, CodigoQuestao, AlternativaOrdem) %>% 
+      spread(key = CodigoQuestao, value =  AlternativaOrdem, fill = NA) 
     
   } else {
     
