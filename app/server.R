@@ -5,18 +5,8 @@ server <- function(input, output, session) {
   tct <- calcularTCT(matriz[,-1])
   
   descript <- tct |>  
-    mutate(Dificuldade = case_when(DIFI <= 0.1 ~ "Muito Difícil", 
-                                   DIFI > 0.1 & DIFI <= 0.3 ~ "Difícil", 
-                                   DIFI > 0.3 & DIFI <= 0.7 ~ "Média", 
-                                   DIFI > 0.7 & DIFI <= 0.9 ~ "Fácil", 
-                                   DIFI  > 0.9 ~ "Muito Fácil"),
-           Bisserial = case_when(
-             BIS <= 0 ~ "Inapropriado",
-             BIS > 0   & BIS <= 0.1 ~ "Inadequado",
-             BIS > 0.1 & BIS < 0.2 ~ "Moderado",
-             BIS > 0.2 & BIS < 0.3 ~ "Adequado",
-             BIS > 0.3 & BIS < 1 ~ "Excelente"
-           ))
+    mutate(Dificuldade = classificacaoDificuldade(DIFI),
+           Bisserial = classificacaoBisserial(BIS))
   
   ### Renderizar outputs
   
