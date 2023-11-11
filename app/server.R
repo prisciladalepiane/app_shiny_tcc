@@ -46,9 +46,10 @@ server <- function(input, output, session) {
       aes(x = Acertos, y = n, colour = Alternativa) +
       geom_line(size = 1) +
       scale_color_hue(direction = 1) +
-      theme_minimal() + theme(
+      theme_classic() + theme(
         plot.background = element_rect(fill = "#EEEEEE"), 
         panel.background = element_rect(fill = "#EEEEEE", colour="#EEEEEE"),
+        legend.background=element_rect(fill="#EEEEEE", colour=NA)
       )
-  )
+      )
 }

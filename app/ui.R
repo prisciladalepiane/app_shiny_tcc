@@ -4,6 +4,7 @@
 ui <- navbarPage(
   
   title = "Unicesumar",
+  selected = "Análise por questão",
   
   tags$head(
     tags$style(HTML("
@@ -72,7 +73,7 @@ ui <- navbarPage(
              
              mainPanel(
                column(10,
-                   h3("Proporção de Alternativa por número de acertos"),    
+                   HTML("<H3><center>Proporção de Alternativa por número de acertos</center></h3>"),    
                    plotOutput("gfAlternativas")
                         )
                
