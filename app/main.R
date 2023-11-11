@@ -40,7 +40,7 @@ acertos <- matriz %>% select(RespondenteId) %>% mutate(Acertos = rowSums(matriz[
 grafico_alt <- respostas |> left_join(acertos) |>
   group_by(Acertos,CodigoQuestao,AlternativaOrdem) |> 
   count() |>
-  mutate(AlternativaOrdem = as.character(AlternativaOrdem)) 
+  mutate(Alternativa = LETTERS[AlternativaOrdem]) 
 
 
 ###########################  Rodar Aplicacao ################################### 
