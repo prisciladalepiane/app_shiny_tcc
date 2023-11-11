@@ -41,11 +41,15 @@ server <- function(input, output, session) {
   })
   
   output$gfAlternativas <- renderPlot(
-    ggplot(filtrarQuestao()) +
-      aes(x = Acertos, y = n, colour = AlternativaOrdem) +
+    filtrarQuestao() |>
+      ggplot() +
+      aes(x = Acertos, y = n, colour = Alternativa) +
       geom_line(size = 1) +
       scale_color_hue(direction = 1) +
-      theme_minimal() +
-      labs(title = input$slQuestao)
-  )
+      theme_classic() + theme(
+        plot.background = element_rect(fill = "#EEEEEE"), 
+        panel.background = element_rect(fill = "#EEEEEE", colour="#EEEEEE"),
+        legend.background=element_rect(fill="#EEEEEE", colour=NA)
+      )
+      )
 }
