@@ -16,7 +16,8 @@ source("server.R")
 teste <- read.csv2("C:/tcc2_eng/respostas_teste.csv")
 gabarito <- read.csv2("C:/tcc2_eng/gabarito_teste.csv")
 
-respostas <- teste 
+respostas <- teste |> mutate(CodigoQuestao = str_sub(CodigoQuestao,1,3))
+gabarito <- gabarito |> mutate(Item = str_sub(Item,1,3))
 
 questoes <- gabarito$Item
 
