@@ -42,4 +42,11 @@ server <- function(input, output, session) {
         legend.background=element_rect(fill="#EEEEEE", colour=NA)
       )
       )
+  
+  output$dwDescript <- downloadHandler("indices_tct_item.csv",
+                                       content = function(file){
+                                         write.csv2(descript, file, row.names = FALSE)
+                                       })
+
+  
 }
