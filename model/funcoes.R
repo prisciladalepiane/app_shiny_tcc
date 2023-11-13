@@ -92,3 +92,41 @@ calculoTctAlternativas <- function(m, gab){
   
   return(fim |> select(Item, everything()))
 }
+
+
+formatarTctAlternativas <- function(tct_alt) {
+  
+  retorno <- tct_alt  |>
+    select(Item, correct, key, n, rspP, pBis) %>%  
+    mutate_if(is.double, ~round(.,2)) |>
+    mutate(rspP = paste0(rspP * 100, "%")) |> distinct() |> 
+    gather(key = "Alternativa", value = "Valores", -c(Item, key)) |> 
+    spread(key = key, value = Valores) |>
+    arrange(Item, factor(Alternativa, levels = c("correct", "n", "rspP", "pBis")))
+  
+    return(retorno)
+  
+}
+
+
+classificacaoDificuldade <- function(DIFI){
+  case_when(DIFI <= 0.1 ~ "Muito Difícil", 
+            DIFI > 0.1 & DIFI <= 0.3 ~ "Difícil", 
+            DIFI > 0.3 & DIFI <= 0.7 ~ "Média", 
+            DIFI > 0.7 & DIFI <= 0.9 ~ "Fácil", 
+            DIFI  > 0.9 ~ "Muito Fácil")
+}
+
+classificacaoBisserial <- function(BIS){
+  case_when(
+    BIS <= 0 ~ "Inapropriado",
+    BIS > 0   & BIS <= 0.1 ~ "Inadequado",
+    BIS > 0.1 & BIS < 0.2 ~ "Moderado",
+    BIS > 0.2 & BIS < 0.3 ~ "Adequado",
+    BIS > 0.3 & BIS < 1 ~ "Excelente"
+  )
+}
+
+
+
+
