@@ -7,9 +7,9 @@ library(shinyWidgets)
 library(htmltools)
 library(tidyverse)
 
-source("../model/funcoes.R")
-source("ui.R")
-source("server.R")
+source("./model/funcoes.R")
+source("app/ui.R")
+source("app/server.R")
 
 ###########################  Definir Variáveis ################################# 
 
