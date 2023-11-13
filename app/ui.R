@@ -8,6 +8,7 @@ ui <- navbarPage(
   
   tags$head(
     tags$style(HTML("
+        
                 body {
                   background-color: #EEEEEE;
                   color: black;
@@ -16,6 +17,11 @@ ui <- navbarPage(
                     text-align: center;
                     font-size: 18px
                 }
+                
+                .btn-default { 
+                    background-color: #286090;
+                    color: #fff;
+                
                 /* Make text visible on inputs */
                                 "))
   ),
