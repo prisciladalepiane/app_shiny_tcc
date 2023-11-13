@@ -12,7 +12,7 @@ server <- function(input, output, session) {
   
   output$tbDescript <- renderTable(descript)
   
-  output$tbAlternativas <- renderTable(tct_alternativas)
+  output$tbAlternativas <- renderTable(tct_alt)
   
   output$tbRespostas <- renderDataTable({
     
@@ -50,7 +50,7 @@ server <- function(input, output, session) {
   
   output$dwTctAlt <- downloadHandler("indices_tct_alternativa.csv",
                                        content = function(file){
-                                         write.csv2(descript, file, row.names = FALSE)
+                                         write.csv2(tct_alt, file, row.names = FALSE)
                                        })
 
   
