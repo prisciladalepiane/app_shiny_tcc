@@ -47,6 +47,11 @@ server <- function(input, output, session) {
                                        content = function(file){
                                          write.csv2(descript, file, row.names = FALSE)
                                        })
+  
+  output$dwTctAlt <- downloadHandler("indices_tct_alternativa.csv",
+                                       content = function(file){
+                                         write.csv2(descript, file, row.names = FALSE)
+                                       })
 
   
 }
