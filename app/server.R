@@ -12,7 +12,7 @@ server <- function(input, output, session) {
   
   output$tbDescript <- renderTable(descript)
   
-  output$tbAlternativas <- renderTable(tct_alternativas)
+  output$tbAlternativas <- renderTable(tct_alt)
   
   output$tbRespostas <- renderDataTable({
     
@@ -42,4 +42,16 @@ server <- function(input, output, session) {
         legend.background=element_rect(fill="#EEEEEE", colour=NA)
       )
       )
+  
+  output$dwDescript <- downloadHandler("indices_tct_item.csv",
+                                       content = function(file){
+                                         write.csv2(descript, file, row.names = FALSE)
+                                       })
+  
+  output$dwTctAlt <- downloadHandler("indices_tct_alternativa.csv",
+                                       content = function(file){
+                                         write.csv2(tct_alt, file, row.names = FALSE)
+                                       })
+
+  
 }
