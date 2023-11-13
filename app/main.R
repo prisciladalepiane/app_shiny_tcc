@@ -27,7 +27,7 @@ matriz_alternativas <- respostasParaMatriz(respostas, alternativas = T)
 
 tct_alt <- calculoTctAlternativas(matriz_alternativas, gabarito)
 
-tct_alternativas <- formatarTctAlternativas(matriz)
+tct_alternativas <- formatarTctAlternativas(tct_alt)
 
 acertos <- matriz |> select(RespondenteId) |> mutate(Acertos = rowSums(matriz[,-1]))
 
