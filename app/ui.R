@@ -53,11 +53,14 @@ ui <- navbarPage(
   tabPanel("Índices TCT",
            
            
-           column(width = 12,offset = 2, tableOutput("tbDescript"))        
+           column(width = 12,offset = 9,downloadButton("dwDescript", label = "Baixar Dados")),
+           column(width = 12,offset = 2, tableOutput("tbDescript"))
+           
            
            
   ),
   tabPanel("Análise Alternativas",
+           column(width = 12,offset = 9,downloadButton("dwTctAlt", label = "Baixar Dados")),
            column(width = 12,offset = 2, tableOutput("tbAlternativas"))
            
   ),
