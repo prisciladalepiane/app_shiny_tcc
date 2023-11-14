@@ -8,8 +8,6 @@ library(htmltools)
 library(tidyverse)
 
 source("../model/funcoes.R")
-source("ui.R")
-source("server.R")
 
 ###########################  Definir Variáveis ################################# 
 
@@ -38,6 +36,9 @@ grafico_alt <- respostas |> left_join(acertos) |>
 
 
 ###########################  Rodar Aplicacao ################################### 
+
+source("ui.R")
+source("server.R")
 
 shinyApp(ui = ui, server = server)
 
