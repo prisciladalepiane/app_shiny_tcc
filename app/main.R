@@ -7,6 +7,7 @@ library(shinyWidgets)
 library(htmltools)
 library(tidyverse)
 
+
 source("../model/funcoes.R")
 
 ###########################  Definir Variáveis ################################# 

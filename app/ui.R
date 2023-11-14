@@ -4,10 +4,11 @@
 ui <- navbarPage(
   
   title = "Unicesumar",
-  selected = "Análise por questão",
+  selected = "Índices TCT",
   
   tags$head(
     tags$style(HTML("
+        
                 body {
                   background-color: #EEEEEE;
                   color: black;
@@ -16,6 +17,18 @@ ui <- navbarPage(
                     text-align: center;
                     font-size: 18px
                 }
+                
+                .btn-default { 
+                    background-color: #286090;
+                    color: #fff;
+                }
+                .well {
+                     background-color: #EEEEEE;  
+                     box-shadow: unset;
+                     border: unset;
+                }
+           
+                
                 /* Make text visible on inputs */
                                 "))
   ),
@@ -52,12 +65,22 @@ ui <- navbarPage(
   ),
   tabPanel("Índices TCT",
            
+         fluidRow(
+           column(width = 2,
+                  h3(" "),
+                  downloadButton("dwDescript", label = "Baixar Dados")),
+           column(width = 5,
+              wellPanel(
+                        HTML("<h4><center>Analise Teoria Clássica dos Testes por Item</h4><c/enter>"),
+                    tableOutput("tbDescript"),offset = 3))
+             
+           )
            
-           column(width = 12,offset = 2, tableOutput("tbDescript"))        
            
            
   ),
   tabPanel("Análise Alternativas",
+           column(width = 12,offset = 9,downloadButton("dwTctAlt", label = "Baixar Dados")),
            column(width = 12,offset = 2, tableOutput("tbAlternativas"))
            
   ),
