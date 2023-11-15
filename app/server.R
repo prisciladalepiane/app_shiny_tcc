@@ -10,9 +10,9 @@ server <- function(input, output, session) {
   
   ### Renderizar outputs
   
-  output$tbDescript <- renderTable(descript)
+  output$tbDescript <- renderDataTable(descript)
   
-  output$tbAlternativas <- renderTable(tct_alt)
+  output$tbAlternativas <- renderDataTable(tct_alt)
   
   output$tbRespostas <- renderDataTable({
     

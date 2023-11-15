@@ -72,7 +72,7 @@ ui <- navbarPage(
            column(width = 5,
               wellPanel(
                         HTML("<h4><center>Analise Teoria Clássica dos Testes por Item</h4><c/enter>"),
-                    tableOutput("tbDescript"),offset = 3))
+                        dataTableOutput("tbDescript"),offset = 3))
              
            )
            
@@ -87,7 +87,7 @@ ui <- navbarPage(
              column(width = 5,
                     wellPanel(
                       HTML("<h4><center>Analise Teoria Clássica dos Testes por Alternativas</h4><c/enter>"),
-                      tableOutput("tbAlternativas"),offset = 3))
+                      dataTableOutput("tbAlternativas"),offset = 3))
              
            )
            
