@@ -72,7 +72,7 @@ ui <- navbarPage(
            column(width = 5,
               wellPanel(
                         HTML("<h4><center>Analise Teoria Clássica dos Testes por Item</h4><c/enter>"),
-                    tableOutput("tbDescript"),offset = 3))
+                        dataTableOutput("tbDescript"),offset = 3))
              
            )
            
@@ -80,8 +80,16 @@ ui <- navbarPage(
            
   ),
   tabPanel("Análise Alternativas",
-           column(width = 12,offset = 9,downloadButton("dwTctAlt", label = "Baixar Dados")),
-           column(width = 12,offset = 2, tableOutput("tbAlternativas"))
+           fluidRow(
+             column(width = 2,
+                    h3(" "),
+                    downloadButton("dwTctAlt", label = "Baixar Dados")),
+             column(width = 5,
+                    wellPanel(
+                      HTML("<h4><center>Analise Teoria Clássica dos Testes por Alternativas</h4><c/enter>"),
+                      dataTableOutput("tbAlternativas"),offset = 3))
+             
+           )
            
   ),
   tabPanel("Análise por questão",
