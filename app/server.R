@@ -8,6 +8,8 @@ server <- function(input, output, session) {
     mutate(Dificuldade = classificacaoDificuldade(DIFI),
            Bisserial = classificacaoBisserial(BIS))
   
+  descript_show <- descript |> mutate_if(is.double,~round(.,2))
+  
   distribuicao_dif <- descript |> 
     group_by(Dificuldade) %>% 
     summarise(n = n(), p = round(n/nrow(.)*100,1))
@@ -16,7 +18,7 @@ server <- function(input, output, session) {
   ### Renderizar outputs
   
   output$tbDescript <- DT::renderDT({
-    DT::datatable(descript,options = list(
+    DT::datatable(descript_show,options = list(
       language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json'),
       pageLength = 20)
     )
