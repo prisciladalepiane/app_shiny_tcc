@@ -8,7 +8,7 @@ library(htmltools)
 library(tidyverse)
 
 
-source("../model/funcoes.R")
+source("./model/funcoes.R")
 
 ###########################  Definir Variáveis ################################# 
 
