@@ -14,6 +14,9 @@ server <- function(input, output, session) {
     group_by(Dificuldade) %>% 
     summarise(n = n(), p = round(n/nrow(.)*100,1))
   
+  distribuicao_bis <- descript |> 
+    group_by(Dificuldade) %>% 
+    summarise(n = n(), p = round(n/nrow(.)*100,1))
   
   ### Renderizar outputs
   
@@ -23,6 +26,8 @@ server <- function(input, output, session) {
       pageLength = 20)
     )
   })
+  
+  output$tbDistDif <- renderTable(distribuicao_dif)
   
   output$tbAlternativas <- renderDataTable(tct_alt)
   
