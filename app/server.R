@@ -12,9 +12,15 @@ server <- function(input, output, session) {
     group_by(Dificuldade) %>% 
     summarise(n = n(), p = round(n/nrow(.)*100,1))
   
+  
   ### Renderizar outputs
   
-  output$tbDescript <- renderDataTable(descript)
+  output$tbDescript <- DT::renderDT({
+    DT::datatable(descript,options = list(
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json'),
+      pageLength = 20)
+    )
+  })
   
   output$tbAlternativas <- renderDataTable(tct_alt)
   
