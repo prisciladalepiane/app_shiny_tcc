@@ -52,6 +52,7 @@ ui <- navbarPage(
                
                wellPanel(
                  fileInput("file1", "Buscar arquivo csv", accept = ".csv"),
+               )
              ),
              
              mainPanel(
