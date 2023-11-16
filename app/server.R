@@ -20,8 +20,8 @@ server <- function(input, output, session) {
   
   ### Renderizar outputs
   
-  output$tbDescript <- DT::renderDT({
-    DT::datatable(descript_show,options = list(
+  output$tbDescript <- renderDT({
+    DT::datatable(descript, options = list(
       language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json'),
       pageLength = 20)
     )
@@ -29,7 +29,11 @@ server <- function(input, output, session) {
   
   output$tbDistDif <- renderTable(distribuicao_dif)
   
-  output$tbAlternativas <- renderDataTable(tct_alt)
+  output$tbAlternativas <- renderDT(
+                   datatable(tct_alternativas, options = list(
+                     language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json'),
+                     pageLength = 20)
+                   ))
   
   output$tbRespostas <- renderDataTable({
     

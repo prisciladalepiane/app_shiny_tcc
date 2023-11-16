@@ -6,6 +6,7 @@ library(fresh)
 library(shinyWidgets)
 library(htmltools)
 library(tidyverse)
+library(DT)
 
 
 source("./model/funcoes.R")
@@ -38,8 +39,10 @@ grafico_alt <- respostas |> left_join(acertos) |>
 
 ###########################  Rodar Aplicacao ################################### 
 
-source("app/ui.R")
-source("app/server.R")
+source("server.R")
+source("ui.R")
+# source("app/server.R")
+# source("app/ui.R")
 
 shinyApp(ui = ui, server = server)
 
