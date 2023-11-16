@@ -8,6 +8,10 @@ server <- function(input, output, session) {
     mutate(Dificuldade = classificacaoDificuldade(DIFI),
            Bisserial = classificacaoBisserial(BIS))
   
+  distribuicao_dif <- descript |> 
+    group_by(Dificuldade) %>% 
+    summarise(n = n(), p = round(n/nrow(.)*100,1))
+  
   ### Renderizar outputs
   
   output$tbDescript <- renderDataTable(descript)
