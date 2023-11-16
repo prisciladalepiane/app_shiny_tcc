@@ -63,23 +63,20 @@ ui <- navbarPage(
              
            )       
   ),
-  tabPanel("Índices TCT",
-           
+  navbarMenu("Índices TCT",
+   tabPanel("Por Item",
          fluidRow(
            column(width = 2,
                   h3(" "),
                   downloadButton("dwDescript", label = "Baixar Dados")),
-           column(width = 5,
+           column(width = 7,
               wellPanel(
                         HTML("<h4><center>Analise Teoria Clássica dos Testes por Item</h4><c/enter>"),
                         dataTableOutput("tbDescript"),offset = 3))
              
            )
-           
-           
-           
   ),
-  tabPanel("Análise Alternativas",
+  tabPanel("Por Alternativas",
            fluidRow(
              column(width = 2,
                     h3(" "),
@@ -91,7 +88,7 @@ ui <- navbarPage(
              
            )
            
-  ),
+  )),
   tabPanel("Análise por questão",
            sidebarLayout(
              
