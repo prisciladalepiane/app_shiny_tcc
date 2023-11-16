@@ -6,7 +6,9 @@ server <- function(input, output, session) {
   
   descript <- tct |>  
     mutate(Dificuldade = classificacaoDificuldade(DIFI),
-           Bisserial = classificacaoBisserial(BIS))
+           Bisserial = classificacaoBisserial(BIS),
+           Item = ifelse(BIS > 0.1, Item,
+             paste('<font color="red">',icon("triangle-exclamation"),Item,'</font>')))  
   
   descript_show <- descript |> mutate_if(is.double,~round(.,2))
   
@@ -23,7 +25,7 @@ server <- function(input, output, session) {
   output$tbDescript <- renderDT({
     DT::datatable(descript_show, options = list(
       language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json'),
-      pageLength = 20)
+      pageLength = 20), escape = F
     )
   })
   
@@ -32,7 +34,7 @@ server <- function(input, output, session) {
   output$tbAlternativas <- renderDT(
                    datatable(tct_alt|> mutate_if(is.double,~round(.,2)), options = list(
                      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json'),
-                     pageLength = 20)
+                     pageLength = 20), escape = F
                    ))
   
   output$tbRespostas <- renderDataTable({

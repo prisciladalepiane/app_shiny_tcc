@@ -6,6 +6,8 @@ ui <- navbarPage(
   title = "Teoria Clássica dos Testes",
   selected = "Índices TCT",
   
+  tags$script(src = "https://kit.fontawesome.com/<you>.js"),
+  
   tags$head(
     tags$style(HTML("
         
