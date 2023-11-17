@@ -6,9 +6,10 @@ library(fresh)
 library(shinyWidgets)
 library(htmltools)
 library(tidyverse)
+library(DT)
 
 
-source("../model/funcoes.R")
+source("./model/funcoes.R")
 
 ###########################  Definir Variáveis ################################# 
 
@@ -38,8 +39,10 @@ grafico_alt <- respostas |> left_join(acertos) |>
 
 ###########################  Rodar Aplicacao ################################### 
 
-source("ui.R")
 source("server.R")
+source("ui.R")
+# source("app/server.R")
+# source("app/ui.R")
 
 shinyApp(ui = ui, server = server)
 

@@ -3,8 +3,10 @@
 
 ui <- navbarPage(
   
-  title = "Unicesumar",
+  title = "Teoria Clássica dos Testes",
   selected = "Índices TCT",
+  
+  tags$script(src = "https://kit.fontawesome.com/<you>.js"),
   
   tags$head(
     tags$style(HTML("
@@ -51,9 +53,8 @@ ui <- navbarPage(
              sidebarPanel(
                
                wellPanel(
-                 fileInput("file1", "Buscar arquivo csv", accept = ".csv")
+                 fileInput("file1", "Buscar arquivo csv", accept = ".csv"),
                )
-               
              ),
              
              mainPanel(
@@ -63,35 +64,32 @@ ui <- navbarPage(
              
            )       
   ),
-  tabPanel("Índices TCT",
-           
+  navbarMenu("Índices TCT",
+   tabPanel("Por Item",
          fluidRow(
            column(width = 2,
                   h3(" "),
                   downloadButton("dwDescript", label = "Baixar Dados")),
-           column(width = 5,
+           column(width = 7,
               wellPanel(
-                        HTML("<h4><center>Analise Teoria Clássica dos Testes por Item</h4><c/enter>"),
+                        HTML("<h3><center>Analise Teoria Clássica dos Testes por Item</h3><c/enter>"),
                         dataTableOutput("tbDescript"),offset = 3))
              
            )
-           
-           
-           
   ),
-  tabPanel("Análise Alternativas",
+  tabPanel("Por Alternativas",
            fluidRow(
              column(width = 2,
                     h3(" "),
                     downloadButton("dwTctAlt", label = "Baixar Dados")),
              column(width = 5,
                     wellPanel(
-                      HTML("<h4><center>Analise Teoria Clássica dos Testes por Alternativas</h4><c/enter>"),
+                      HTML("<center><h3>Analise Teoria Clássica dos Testes por Alternativas</h3></center>"),
                       dataTableOutput("tbAlternativas"),offset = 3))
              
            )
            
-  ),
+  )),
   tabPanel("Análise por questão",
            sidebarLayout(
              
