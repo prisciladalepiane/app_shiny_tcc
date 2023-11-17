@@ -53,6 +53,11 @@ server <- function(input, output, session) {
    
   })
   
+  filtrarQuestaoTabela <- eventReactive(input$slQuestao,{
+    tct_alternativas |> filter(Item == input$slQuestao) |> select(-Item)
+    
+  })
+  
   output$gfAlternativas <- renderPlot(
     filtrarQuestaoGrafico() |>
       ggplot() +
@@ -65,6 +70,8 @@ server <- function(input, output, session) {
         legend.background=element_rect(fill="#EEEEEE", colour=NA)
       )
       )
+  
+  output$tbFiltroAlternativas <- renderTable(filtrarQuestaoTabela())
   
   output$dwDescript <- downloadHandler("indices_tct_item.csv",
                                        content = function(file){

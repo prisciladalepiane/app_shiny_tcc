@@ -102,7 +102,8 @@ ui <- navbarPage(
              sidebarPanel(
                
                selectInput("slQuestao", "Questão:", 
-                           choices = questoes, selected = 1)
+                           choices = questoes, selected = 1),
+               tableOutput("tbFiltroAlternativas")
                
              ),
              
