@@ -25,7 +25,7 @@ server <- function(input, output, session) {
   output$tbDescript <- renderDT({
     DT::datatable(descript_show, options = list(
       language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json'),
-      pageLength = 20), escape = F
+      pageLength = 20), escape = F, rownames = F
     )
   })
   
@@ -34,7 +34,7 @@ server <- function(input, output, session) {
   output$tbAlternativas <- renderDT(
                    datatable(tct_alt|> mutate_if(is.double,~round(.,2)), options = list(
                      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json'),
-                     pageLength = 20), escape = F
+                     pageLength = 20), escape = F, rownames = F
                    ))
   
   output$tbRespostas <- renderDataTable({
