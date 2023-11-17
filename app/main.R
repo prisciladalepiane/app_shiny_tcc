@@ -25,7 +25,8 @@ matriz <- respostasParaMatriz(respostas)
 
 matriz_alternativas <- respostasParaMatriz(respostas, alternativas = T)
 
-tct_alt <- calculoTctAlternativas(matriz_alternativas, gabarito)
+tct_alt <- calculoTctAlternativas(matriz_alternativas, gabarito) |>
+  mutate(key = ifelse(key == 0, "SR", LETTERS[as.numeric(key)]))
 
 tct_alternativas <- formatarTctAlternativas(tct_alt)
 

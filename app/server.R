@@ -48,13 +48,18 @@ server <- function(input, output, session) {
     return(read.csv2(arq$datapath))
   })
   
-  filtrarQuestao <- eventReactive(input$slQuestao,{
+  filtrarQuestaoGrafico <- eventReactive(input$slQuestao,{
     grafico_alt |> filter(CodigoQuestao == input$slQuestao) 
    
   })
   
+  filtrarQuestaoTabela <- eventReactive(input$slQuestao,{
+    tct_alternativas |> filter(Item == input$slQuestao) |> select(-Item)
+    
+  })
+  
   output$gfAlternativas <- renderPlot(
-    filtrarQuestao() |>
+    filtrarQuestaoGrafico() |>
       ggplot() +
       aes(x = Acertos, y = n, colour = Alternativa) +
       geom_line(size = 1) +
@@ -65,6 +70,8 @@ server <- function(input, output, session) {
         legend.background=element_rect(fill="#EEEEEE", colour=NA)
       )
       )
+  
+  output$tbFiltroAlternativas <- renderTable(filtrarQuestaoTabela())
   
   output$dwDescript <- downloadHandler("indices_tct_item.csv",
                                        content = function(file){
