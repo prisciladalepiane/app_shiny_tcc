@@ -67,9 +67,13 @@ ui <- navbarPage(
   navbarMenu("Índices TCT",
    tabPanel("Por Item",
          fluidRow(
-           column(width = 2,
+           column(width = 3,
+              wellPanel(
+                
                   h3(" "),
-                  downloadButton("dwDescript", label = "Baixar Dados")),
+                  downloadButton("dwDescript", label = "Baixar Dados"))
+                
+              ),
            column(width = 7,
               wellPanel(
                         HTML("<h3><center>Analise Teoria Clássica dos Testes por Item</h3><c/enter>"),
@@ -79,10 +83,12 @@ ui <- navbarPage(
   ),
   tabPanel("Por Alternativas",
            fluidRow(
-             column(width = 2,
+             column(width = 3,
+              wellPanel(
                     h3(" "),
-                    downloadButton("dwTctAlt", label = "Baixar Dados")),
-             column(width = 5,
+                    downloadButton("dwTctAlt", label = "Baixar Dados"))
+              ),
+             column(width = 7,
                     wellPanel(
                       HTML("<center><h3>Analise Teoria Clássica dos Testes por Alternativas</h3></center>"),
                       dataTableOutput("tbAlternativas"),offset = 3))
