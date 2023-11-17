@@ -102,7 +102,13 @@ formatarTctAlternativas <- function(tct_alt) {
     mutate(rspP = paste0(rspP * 100, "%")) |> distinct() |> 
     gather(key = "Alternativa", value = "Valores", -c(Item, key)) |> 
     spread(key = key, value = Valores) |>
-    arrange(Item, factor(Alternativa, levels = c("correct", "n", "rspP", "pBis")))
+    arrange(Item, factor(Alternativa, levels = c("correct", "n", "rspP", "pBis"))) |>
+    mutate(Alternativa = recode(Alternativa, 
+                                "correct" = "Correta",
+                                "n" = "Total",
+                                "rspP" = "% ",
+                                "pBis" = "Bisserial"))
+  
   
     return(retorno)
   
