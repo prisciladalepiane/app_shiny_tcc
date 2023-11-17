@@ -48,13 +48,13 @@ server <- function(input, output, session) {
     return(read.csv2(arq$datapath))
   })
   
-  filtrarQuestao <- eventReactive(input$slQuestao,{
+  filtrarQuestaoGrafico <- eventReactive(input$slQuestao,{
     grafico_alt |> filter(CodigoQuestao == input$slQuestao) 
    
   })
   
   output$gfAlternativas <- renderPlot(
-    filtrarQuestao() |>
+    filtrarQuestaoGrafico() |>
       ggplot() +
       aes(x = Acertos, y = n, colour = Alternativa) +
       geom_line(size = 1) +
