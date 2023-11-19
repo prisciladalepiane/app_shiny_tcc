@@ -8,13 +8,15 @@ library(htmltools)
 library(tidyverse)
 library(DT)
 
+# Para testes
+# setwd("./app")
 
-source("./model/funcoes.R")
+source("funcoes.R")
 
 ###########################  Definir Variáveis ################################# 
 
-teste <- read.csv2("C:/tcc2_eng/respostas_teste.csv")
-gabarito <- read.csv2("C:/tcc2_eng/gabarito_teste.csv")
+teste <- read.csv2("dados/respostas_teste.csv")
+gabarito <- read.csv2("dados/gabarito_teste.csv")
 
 respostas <- teste |> mutate(CodigoQuestao = str_sub(CodigoQuestao,1,3))
 gabarito <- gabarito |> mutate(Item = str_sub(Item,1,3))
@@ -42,8 +44,6 @@ grafico_alt <- respostas |> left_join(acertos) |>
 
 source("server.R")
 source("ui.R")
-# source("app/server.R")
-# source("app/ui.R")
 
 shinyApp(ui = ui, server = server)
 
