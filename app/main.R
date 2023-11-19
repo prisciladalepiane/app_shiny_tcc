@@ -1,12 +1,12 @@
 ###########################  Carregar Pacotes ##################################
 
-library(shiny)
-library(ltm)
-library(fresh)
-library(shinyWidgets)
-library(htmltools)
-library(tidyverse)
-library(DT)
+if(!require("shiny")){install.packages("shiny")}
+if(!require("ltm")){install.packages("ltm")}
+if(!require("fresh")){install.packages("fresh")}
+if(!require("shinyWidgets")){install.packages("shinyWidgets")}
+if(!require("htmltools")){install.packages("htmltools")}
+if(!require("tidyverse")){install.packages("tidyverse")}
+if(!require("DT")){install.packages("DT")}
 
 # Para testes
 # setwd("./app")
