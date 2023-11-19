@@ -1,3 +1,4 @@
+app/rsconnect
 *.Rproj.user
 *.Rhistory
 *.RData
