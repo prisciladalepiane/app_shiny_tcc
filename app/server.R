@@ -20,6 +20,10 @@ server <- function(input, output, session) {
     group_by(Dificuldade) %>% 
     summarise(n = n(), p = round(n/nrow(.)*100,1))
   
+  tct_alt_show <- tct_alt |> mutate_if(is.double,~round(.,2))|>
+    arrange(Item, key) %>% 
+    mutate_all(~ifelse(!str_detect(correct, "\\*"), ., paste("<b>",.,"</b>"))) 
+  
   ### Renderizar outputs
   
   output$tbDescript <- renderDT({
@@ -32,7 +36,7 @@ server <- function(input, output, session) {
   output$tbDistDif <- renderTable(distribuicao_dif)
   
   output$tbAlternativas <- renderDT(
-                   datatable(tct_alt|> mutate_if(is.double,~round(.,2)), options = list(
+                   datatable(tct_alt_show, options = list(
                      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json'),
                      pageLength = 20), escape = F, rownames = F
                    ))
