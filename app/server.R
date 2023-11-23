@@ -20,8 +20,9 @@ server <- function(input, output, session) {
     group_by(Dificuldade) %>% 
     summarise(n = n(), p = round(n/nrow(.)*100,1))
   
-  tct_alt_show <- tct_alt |> mutate_if(is.double,~round(.,2)) %>% 
-    mutate_all(~ifelse(!str_detect(correct, "\\*"), ., paste("<b>",.,"</b>")))
+  tct_alt_show <- tct_alt |> mutate_if(is.double,~round(.,2))|>
+    arrange(Item, key) %>% 
+    mutate_all(~ifelse(!str_detect(correct, "\\*"), ., paste("<b>",.,"</b>"))) 
   
   ### Renderizar outputs
   
