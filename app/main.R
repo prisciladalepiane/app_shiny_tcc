@@ -39,6 +39,10 @@ grafico_alt <- respostas |> left_join(acertos) |>
   count() |>
   mutate(Alternativa = LETTERS[AlternativaOrdem]) 
 
+grafico_alt2 <- grafico_alt |> left_join(
+  grafico_alt |> group_by(CodigoQuestao,Acertos) |> summarise(Total = sum(n))
+) |> mutate(p = n/Total) 
+
 
 ###########################  Rodar Aplicacao ################################### 
 

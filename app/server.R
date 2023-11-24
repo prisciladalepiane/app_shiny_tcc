@@ -53,7 +53,7 @@ server <- function(input, output, session) {
   })
   
   filtrarQuestaoGrafico <- eventReactive(input$slQuestao,{
-    grafico_alt |> filter(CodigoQuestao == input$slQuestao) 
+    grafico_alt2 |> filter(CodigoQuestao == input$slQuestao) 
    
   })
   
