@@ -65,7 +65,7 @@ server <- function(input, output, session) {
   output$gfAlternativas <- renderPlot(
     filtrarQuestaoGrafico() |>
       ggplot() +
-      aes(x = Acertos, y = n, colour = Alternativa) +
+      aes(x = Acertos, y = p, colour = Alternativa) +
       geom_line(size = 1) +
       scale_color_hue(direction = 1) +
       theme_classic() + theme(
