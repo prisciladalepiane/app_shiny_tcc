@@ -22,7 +22,8 @@ server <- function(input, output, session) {
   
   tct_alt_show <- tct_alt |> mutate_if(is.double,~round(.,2))|>
     arrange(Item, key) %>% 
-    mutate_all(~ifelse(!str_detect(correct, "\\*"), ., paste("<b>",.,"</b>"))) 
+    mutate_all(~ifelse(!str_detect(correct, "\\*"), ., paste("<b>",.,"</b>"))) |>
+    select(-correct) |> rename(Alternativa = key)
   
   ### Renderizar outputs
   
