@@ -68,7 +68,7 @@ server <- function(input, output, session) {
       ggplot() +
       aes(x = Acertos, y = p, colour = Alternativa) +
       geom_line(size = 1) +
-      scale_color_hue(direction = 1) +
+      scale_color_hue(direction = 1) + ylab("Proporção") +
       theme_classic() + theme(
         plot.background = element_rect(fill = "#EEEEEE"), 
         panel.background = element_rect(fill = "#EEEEEE", colour="#EEEEEE"),
