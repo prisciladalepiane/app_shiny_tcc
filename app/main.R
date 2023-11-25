@@ -27,8 +27,11 @@ matriz <- respostasParaMatriz(respostas)
 
 matriz_alternativas <- respostasParaMatriz(respostas, alternativas = T)
 
-tct_alt <- calculoTctAlternativas(matriz_alternativas, gabarito) |>
-  mutate(key = ifelse(key == 0, "SR", LETTERS[as.numeric(key)]))
+tct_alt <- calculoTctAlternativas(matriz_alternativas, gabarito) 
+
+tct_alt <- tct_alt %>% 
+  filter(key > 0) %>% 
+  mutate(key = LETTERS[as.numeric(key)]) 
 
 tct_alternativas <- formatarTctAlternativas(tct_alt)
 
@@ -38,6 +41,10 @@ grafico_alt <- respostas |> left_join(acertos) |>
   group_by(Acertos,CodigoQuestao,AlternativaOrdem) |> 
   count() |>
   mutate(Alternativa = LETTERS[AlternativaOrdem]) 
+
+grafico_alt2 <- grafico_alt |> left_join(
+  grafico_alt |> group_by(CodigoQuestao,Acertos) |> summarise(Total = sum(n))
+) |> mutate(p = n/Total) 
 
 
 ###########################  Rodar Aplicacao ################################### 

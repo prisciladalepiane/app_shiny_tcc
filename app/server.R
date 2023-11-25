@@ -22,7 +22,8 @@ server <- function(input, output, session) {
   
   tct_alt_show <- tct_alt |> mutate_if(is.double,~round(.,2))|>
     arrange(Item, key) %>% 
-    mutate_all(~ifelse(!str_detect(correct, "\\*"), ., paste("<b>",.,"</b>"))) 
+    mutate_all(~ifelse(!str_detect(correct, "\\*"), ., paste("<b>",.,"</b>"))) |>
+    select(-correct) |> rename(Alternativa = key)
   
   ### Renderizar outputs
   
@@ -53,7 +54,7 @@ server <- function(input, output, session) {
   })
   
   filtrarQuestaoGrafico <- eventReactive(input$slQuestao,{
-    grafico_alt |> filter(CodigoQuestao == input$slQuestao) 
+    grafico_alt2 |> filter(CodigoQuestao == input$slQuestao) 
    
   })
   
@@ -65,9 +66,9 @@ server <- function(input, output, session) {
   output$gfAlternativas <- renderPlot(
     filtrarQuestaoGrafico() |>
       ggplot() +
-      aes(x = Acertos, y = n, colour = Alternativa) +
+      aes(x = Acertos, y = p, colour = Alternativa) +
       geom_line(size = 1) +
-      scale_color_hue(direction = 1) +
+      scale_color_hue(direction = 1) + ylab("Proporção") +
       theme_classic() + theme(
         plot.background = element_rect(fill = "#EEEEEE"), 
         panel.background = element_rect(fill = "#EEEEEE", colour="#EEEEEE"),
