@@ -5,21 +5,27 @@ server <- function(input, output, session) {
   tct <- calcularTCT(matriz[,-1])
   
   descript <- tct |>  
-    mutate(Dificuldade = classificacaoDificuldade(DIFI),
-           Discriminacao = classificacaoDiscriminacao(DISCR))  
+    mutate(Nivel = classificacaoDificuldade(DIFI),
+           Discriminacao = classificacaoDiscriminacao(DISCR),
+           Sugestao = classificacaoDiscriminacaoAcao(DISCR))
   
-  descript_show <- descript |> mutate_if(is.double,~round(.,2)) |>
-    Item = ifelse(BIS > 0.3 & DISCR > 0.3, Item,
+  descript_show <- descript  |>
+   mutate(
+     Item = ifelse(BIS > 0.2, Item,
                   paste('<font color="red">',icon("triangle-exclamation"),Item,'</font>'))
+     # ,Discriminacao = ifelse(DISCR > 0.2, Discriminacao,
+     #                        paste('<font color="red">',Discriminacao,'</font>'))
+     ) |> 
+   mutate_if(is.double,~round(.,3)) 
+    # mutate(BIS = ifelse(BIS < 0.15, paste('<font color="red">', icon("circle-down"),  BIS), BIS))
     
-  
-  distribuicao_dif <- descript |> 
-    group_by(Dificuldade) %>% 
-    summarise(n = n(), p = round(n/nrow(.)*100,1))
-  
-  distribuicao_bis <- descript |> 
-    group_by(Dificuldade) %>% 
-    summarise(n = n(), p = round(n/nrow(.)*100,1))
+  # distribuicao_dif <- descript |> 
+  #   group_by(Dificuldade) %>% 
+  #   summarise(n = n(), p = round(n/nrow(.)*100,1))
+  # 
+  # distribuicao_bis <- descript |> 
+  #   group_by(Dificuldade) %>% 
+  #   summarise(n = n(), p = round(n/nrow(.)*100,1))
   
   tct_alt_show <- tct_alt |> mutate_if(is.double,~round(.,2))|>
     arrange(Item, key) %>% 
