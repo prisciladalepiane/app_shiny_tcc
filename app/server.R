@@ -6,11 +6,12 @@ server <- function(input, output, session) {
   
   descript <- tct |>  
     mutate(Dificuldade = classificacaoDificuldade(DIFI),
-           Discriminacao = classificacaoDiscriminacao(DISCR),
-           Item = ifelse(BIS > 0.1, Item,
-             paste('<font color="red">',icon("triangle-exclamation"),Item,'</font>')))  
+           Discriminacao = classificacaoDiscriminacao(DISCR))  
   
-  descript_show <- descript |> mutate_if(is.double,~round(.,2))
+  descript_show <- descript |> mutate_if(is.double,~round(.,2)) |>
+    Item = ifelse(BIS > 0.3 & DISCR > 0.3, Item,
+                  paste('<font color="red">',icon("triangle-exclamation"),Item,'</font>'))
+    
   
   distribuicao_dif <- descript |> 
     group_by(Dificuldade) %>% 
