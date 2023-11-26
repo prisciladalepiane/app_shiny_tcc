@@ -6,7 +6,7 @@ server <- function(input, output, session) {
   
   descript <- tct |>  
     mutate(Dificuldade = classificacaoDificuldade(DIFI),
-           Bisserial = classificacaoBisserial(BIS),
+           Discriminacao = classificacaoDiscriminacao(DISCR),
            Item = ifelse(BIS > 0.1, Item,
              paste('<font color="red">',icon("triangle-exclamation"),Item,'</font>')))  
   
