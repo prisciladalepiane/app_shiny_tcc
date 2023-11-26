@@ -133,6 +133,21 @@ classificacaoBisserial <- function(BIS){
   )
 }
 
+classificacaoDiscriminacao <- function(DISCR){
+  case_when(
+    DISCR <= 0.2 ~ "Ineficiente",
+    DISCR > 0.2   & DISCR <= 0.3 ~ "Inadequado",
+    DISCR > 0.3 & DISCR < 0.4 ~ "Aceitável",
+    DISCR > 0.4 ~ "Satisfatório"
+  )
+}
 
-
+classificacaoDiscriminacaoAcao <- function(DISCR){
+  case_when(
+    DISCR <= 0.2 ~ "Eliminá-lo ou revisá-lo totalmente",
+    DISCR > 0.2   & DISCR <= 0.3 ~ "Necessita ser revisado.",
+    DISCR > 0.3 & DISCR < 0.4 ~ "Não é necesário a revisão",
+    DISCR > 0.4 ~ "Permanecer no teste"
+  )
+}
 
