@@ -87,7 +87,7 @@ ui <- navbarPage(
               wellPanel(
                     h3(" "),
                     downloadButton("dwTctAlt", label = "Baixar Dados"))
-              ),
+                  ),
              column(width = 8,
                     wellPanel(
                       HTML("<center><h3>Analise Teoria Clássica dos Testes por Alternativas</h3></center>"),
@@ -103,7 +103,11 @@ ui <- navbarPage(
                
                selectInput("slQuestao", "Questão:", 
                            choices = questoes, selected = 1),
-               tableOutput("tbFiltroAlternativas")
+               tableOutput("tbFiltroAlternativas"),
+               
+               br(),
+               HTML('<p align="justify"> <strong> Bisserial: </strong>Alternativas erradas devem ter coeficiente bisserial negativo enquanto a alternativa correta deve ter o coeficiente positivo e, preferencialmente acima de 0,30.<br> Alternativas erradas com coeficiente bisserial positivo indicam que alunos com bom desempenho no teste estão escolhendo aquela alternativa, o que pode indicar um erro induzido, ou seja, uma pegadinha.</p>')
+               
                
              ),
              
