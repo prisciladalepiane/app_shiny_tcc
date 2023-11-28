@@ -48,19 +48,19 @@ ui <- navbarPage(
     )
   ),
   tabPanel("Início",
-           sidebarLayout(
-             
-             sidebarPanel(
-               
+           fluidRow(
+             column(width = 3,
                wellPanel(
                  fileInput("file1", "Buscar arquivo csv", accept = ".csv"),
-               )
-             ),
+                )
+              ),
              
-             mainPanel(
-               dataTableOutput("tbRespostas")
-               
-             )
+               column(width = 6, offset = 1,
+                      wellPanel(
+                        HTML("<h3><center>Tabela com as Respostas</h3><c/enter>"),
+                          dataTableOutput("tbRespostas")
+                      )
+               )
              
            )       
   ),

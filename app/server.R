@@ -57,7 +57,7 @@ server <- function(input, output, session) {
     arq <- input$file1
     
     if(is.null(arq)){
-      return(NULL)
+      return(respostas)
     }
     
     return(read.csv2(arq$datapath))
