@@ -27,10 +27,13 @@ server <- function(input, output, session) {
   #   group_by(Dificuldade) %>% 
   #   summarise(n = n(), p = round(n/nrow(.)*100,1))
   
-  tct_alt_show <- tct_alt |> mutate_if(is.double,~round(.,2))|>
+  tct_alt_show <- tct_alt |> mutate_if(is.double,~round(.,3))|>
+    mutate(rspP = paste(rspP*100,"%")) |>
     arrange(Item, key) %>% 
-    mutate_all(~ifelse(!str_detect(correct, "\\*"), ., paste("<b>",.,"</b>"))) |>
-    select(-correct) |> rename(Alternativa = key)
+    mutate_all(~ifelse(!str_detect(correct, "\\*"), ., paste("<b>",.,"</b>"))) 
+
+  
+  names(tct_alt_show) <- c("Item","Correta", "Alt", "n", "%","Bisserial","Discr","Q1","Q2","Q3","Q4")
   
   ### Renderizar outputs
   
@@ -54,7 +57,7 @@ server <- function(input, output, session) {
     arq <- input$file1
     
     if(is.null(arq)){
-      return(NULL)
+      return(respostas)
     }
     
     return(read.csv2(arq$datapath))
