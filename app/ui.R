@@ -103,6 +103,9 @@ ui <- navbarPage(
                
                selectInput("slQuestao", "Questão:", 
                            choices = questoes, selected = 1),
+               HTML("<center> Estatísticas do Item"),
+               tableOutput("tbFiltroItem"),
+               HTML("<center> Estatísticas das Alternativas"),
                tableOutput("tbFiltroAlternativas"),
                
                br(),
