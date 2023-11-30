@@ -51,11 +51,13 @@ ui <- navbarPage(
            fluidRow(
              column(width = 3,
                wellPanel(
-                 fileInput("file1", "Buscar arquivo csv", accept = ".csv"),
+                 br(),
+                 fileInput("file1", "Buscar arquivo csv Respostas", accept = ".csv"),
+                 fileInput("file2", "Buscar arquivo csv Gabarito", accept = ".csv"),
                 )
               ),
              
-               column(width = 6, offset = 1,
+               column(width = 5, offset = 0.2,
                       wellPanel(
                         HTML("<h3><center>Tabela com as Respostas</h3></center>"),
                           dataTableOutput("tbRespostas"),

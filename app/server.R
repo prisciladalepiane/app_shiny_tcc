@@ -53,7 +53,8 @@ server <- function(input, output, session) {
     
     return(read.csv2(arq$datapath))
     }, options = list(
-    language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json'))
+    language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json')),
+    rownames = F
   )
   
   output$tbGabarito<- renderDataTable({
@@ -66,7 +67,8 @@ server <- function(input, output, session) {
     
     return(read.csv2(arq$datapath))
     }, options = list(
-      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json'))
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json')),
+    rownames = F
   )
   
   filtrarQuestaoGrafico <- eventReactive(input$slQuestao,{
