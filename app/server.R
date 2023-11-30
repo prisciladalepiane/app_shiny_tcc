@@ -1,6 +1,5 @@
 server <- function(input, output, session) {
   
-  
   ###  Cálculos 
   
   resposta <- teste |> mutate(CodigoQuestao = str_sub(CodigoQuestao,1,3))
@@ -60,11 +59,9 @@ server <- function(input, output, session) {
    mutate(
      Item = ifelse(BIS > 0.2, Item,
                   paste('<font color="red">',icon("triangle-exclamation"),Item,'</font>'))
-     # ,Discriminacao = ifelse(DISCR > 0.2, Discriminacao,
-     #                        paste('<font color="red">',Discriminacao,'</font>'))
      ) |> 
    mutate_if(is.double,~round(.,3)) 
-    # mutate(BIS = ifelse(BIS < 0.15, paste('<font color="red">', icon("circle-down"),  BIS), BIS))
+
     
 
   tct_alt_show <- tct_alt |> mutate_if(is.double,~round(.,3))|>
@@ -85,10 +82,10 @@ server <- function(input, output, session) {
   })
   
   output$tbAlternativas <- renderDT(
-                   datatable(tct_alt_show, options = list(
-                     language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json'),
-                     pageLength = 25), escape = F, rownames = F
-                   ))
+     datatable(tct_alt_show, options = list(
+       language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json'),
+       pageLength = 25), escape = F, rownames = F
+     ))
   
   output$tbRespostas <- renderDataTable(respostaReac(), options = list(
     language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json')),
