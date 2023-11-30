@@ -57,8 +57,10 @@ ui <- navbarPage(
              
                column(width = 6, offset = 1,
                       wellPanel(
-                        HTML("<h3><center>Tabela com as Respostas</h3><c/enter>"),
-                          dataTableOutput("tbRespostas")
+                        HTML("<h3><center>Tabela com as Respostas</h3></center>"),
+                          dataTableOutput("tbRespostas"),
+                        HTML("<h3><center>Tabela com Gabarito</h3></center>"),
+                          dataTableOutput("tbGabarito")
                       )
                )
              
